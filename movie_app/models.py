@@ -14,6 +14,9 @@ class Director(models.Model):
     def __str__(self):
         return f' {self.name_director} {self.surname_director} {self.director_email}'
 
+    def get_url_director(self):
+        return reverse('one_dir', args=[self.id])
+
 
 class Movie(models.Model):
     EUR = 'EUR'
@@ -32,6 +35,7 @@ class Movie(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
     year = models.IntegerField(null=True, blank=True)
     budget = models.IntegerField(default=10000, validators=[MinValueValidator(0), MaxValueValidator(10000000)])
+    # добавляет в БД поле  slug
     slug = models.SlugField(default='', null=False)
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='RUB')
 
