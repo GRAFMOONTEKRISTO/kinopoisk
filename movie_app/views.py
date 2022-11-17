@@ -6,6 +6,7 @@ from django.db.models import F, Sum, Max, Min, Count, Avg, Value
 """Импортируем наши записи класса"""
 from .models import Movie
 from .models import Director
+from .models import Actor
 
 
 def show_all_movies(request):
@@ -33,6 +34,9 @@ def show_one_movies(request, slug_movie: str):
     })
 
 
+'------------------------------------------------------------------------------------------------------'
+
+
 def show_all_directors(request):
     directors = Director.objects.all()
 
@@ -47,4 +51,24 @@ def show_one_director(request, id_dir: int):
     dir = Director.objects.get(id=id_dir)
     return render(request, 'movie_app/one_director.html', {
         'dir': dir,
+    })
+
+
+'------------------------------------------------------------------------------------------------------'
+
+
+def show_all_actors(request):
+    actors = Actor.objects.all()
+
+    for actor in actors:
+        actor.save()
+    return render(request, 'movie_app/all_actors.html', {
+        'actors': actors,
+    })
+
+
+def show_one_actor(request, id_act: int):
+    act = Actor.objects.get(id=id_act)
+    return render(request, 'movie_app/one_actor.html', {
+        'act': act,
     })

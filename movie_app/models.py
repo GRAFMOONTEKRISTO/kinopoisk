@@ -30,7 +30,7 @@ class Actor(models.Model):
 
     name_actor = models.CharField(max_length=100)
     surname_actor = models.CharField(max_length=100)
-
+    slug = models.SlugField(default='', null=False, db_index=True)
     gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
 
     def __str__(self):
@@ -38,6 +38,9 @@ class Actor(models.Model):
             return f'Актер {self.name_actor} {self.surname_actor}'
         else:
             return f'Актриса {self.name_actor} {self.surname_actor}'
+
+    def get_url_actor(self):
+        return reverse('one_act', args=[self.id])
 
 
 class Movie(models.Model):
