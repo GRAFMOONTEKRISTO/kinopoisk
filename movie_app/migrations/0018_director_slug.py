@@ -14,5 +14,6 @@ class Migration(migrations.Migration):
             model_name='director',
             name='slug',
             field=models.SlugField(default=None),
+
         ),
     ]

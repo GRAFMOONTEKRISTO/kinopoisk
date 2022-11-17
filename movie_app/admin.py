@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Movie, Director
+from .models import Movie, Director, Actor
 
 # Register your models here.
 
 admin.site.register(Director)
+admin.site.register(Actor)
 
 """С помощью класса, принято называть его MovieAdmin, и обращаться admin.ModelAdmin
 1. с помощью list_display выводим в админке поля, которые нам нужны,

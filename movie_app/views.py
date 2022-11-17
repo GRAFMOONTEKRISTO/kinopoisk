@@ -9,7 +9,6 @@ from .models import Director
 
 
 def show_all_movies(request):
-    # manage.py createsuperusermovies = Movie.objects.order_by('name')
     movies = Movie.objects.annotate(
         true_bool=Value(True),
         false_bool=Value(False),
