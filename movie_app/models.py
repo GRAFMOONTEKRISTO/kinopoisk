@@ -25,7 +25,7 @@ class Actor(models.Model):
 
     GENDERS = [
         (MALE, 'Мужчина'),
-        (FEMALE, 'Женчина'),
+        (FEMALE, 'Женщина'),
     ]
 
     name_actor = models.CharField(max_length=100)

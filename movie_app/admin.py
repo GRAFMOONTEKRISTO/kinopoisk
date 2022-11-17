@@ -52,6 +52,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ['name', 'currency', RatingFilter]
     readonly_fields = ['year']
     prepopulated_fields = {'slug': ('name',)}
+    filter_horizontal = ['actors']  # добавление виджета УРОК - 6.4
     # exclude = ['name', 'rating']
 
     """С помощью новой функии можем добавить новое поле,
