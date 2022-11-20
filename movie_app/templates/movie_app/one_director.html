@@ -10,4 +10,13 @@
   <h3> SURNAME - {{dir.surname_director}}</h3>
   <h3> EMAIL - {{dir.director_email}}</h3>
 
+  <hr>
+
+  <h3> The list films by this director </h3>
+  <ul>
+    {% for movie in dir.movies.all %}
+        <li> {{ movie }} </li>
+    {% endfor %}
+  </ul>
+
 {% endblock %}

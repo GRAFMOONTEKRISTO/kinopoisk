@@ -67,6 +67,7 @@ def show_all_actors(request):
     })
 
 
+
 def show_one_actor(request, id_act: int):
     act = Actor.objects.get(id=id_act)
     return render(request, 'movie_app/one_actor.html', {

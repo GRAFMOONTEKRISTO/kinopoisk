@@ -6,6 +6,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
+
 class Director(models.Model):
     name_director = models.CharField(max_length=100)
     surname_director = models.CharField(max_length=100)
@@ -17,6 +18,14 @@ class Director(models.Model):
 
     def get_url_director(self):
         return reverse('one_dir', args=[self.id])
+
+
+class DressingRoom(models.Model):
+    floor = models.IntegerField()
+    number = models.IntegerField()
+
+    def __str__(self):
+        return f' {self.floor} {self.number} '
 
 
 class Actor(models.Model):
@@ -32,6 +41,7 @@ class Actor(models.Model):
     surname_actor = models.CharField(max_length=100)
     slug = models.SlugField(default='', null=False, db_index=True)
     gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+    dressing = models.OneToOneField(DressingRoom, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         if self.gender == self.MALE:
@@ -62,8 +72,9 @@ class Movie(models.Model):
     budget = models.IntegerField(default=10000, validators=[MinValueValidator(0), MaxValueValidator(10000000)])
     slug = models.SlugField(default='', null=False, db_index=True)
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='RUB')
-    director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True)
-    actors = models.ManyToManyField(Actor)
+    director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True,
+                                 related_name='movies')  # 6.5 про  related_name='movies'
+    actors = models.ManyToManyField(Actor)  # 6.5 про movie_set.all
 
     def __str__(self):
         return f' {self.name} {self.rating}% {self.budget} {self.year}'

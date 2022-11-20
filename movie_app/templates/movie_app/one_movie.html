@@ -5,8 +5,22 @@
 
 {% block content %}
   <h2> Информацию о фильме - {{movie.name}} </h2>
-  <h3> Рейтинг {{movie.rating}} </h3>
-  <h3> Бюджет {{movie.budget}}</h3>
-  <h3> Год выхода {{movie.year}}</h3>
+  <h4> RATING - {{movie.rating}} </h4>
+  <h4> BUDGET - {{movie.budget}}</h4>
+  <h4> YEAR - {{movie.year}}</h4>
+
+  <hr>
+  <h2> Information about Director </h2>
+  <h4> NAME - {{ movie.director.name_director }} </h4>
+  <h4> SURNAME - {{ movie.director.surname_director }} </h4>
+  <h4> EMAIL - {{ movie.director.director_email }} </h4>
+
+  <hr>
+  <h2>The list all actors</h2>
+  <ul>
+    {% for actor in movie.actors.all %}
+        <li> {{ actor }} </li>
+    {% endfor %}
+  </ul>
 
 {% endblock %}

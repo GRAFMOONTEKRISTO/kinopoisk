@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Movie, Director, Actor
+from .models import Movie, Director, Actor, DressingRoom
 
 # Register your models here.
 
 admin.site.register(Director)
 admin.site.register(Actor)
+# admin.site.register(DressingRoom)
 
 """С помощью класса, принято называть его MovieAdmin, и обращаться admin.ModelAdmin
 1. с помощью list_display выводим в админке поля, которые нам нужны,
@@ -42,10 +43,15 @@ class RatingFilter(admin.SimpleListFilter):
             return queryset.filter(rating__gte=80)
 
 
+@admin.register(DressingRoom)
+class DressingRoomAdmin(admin.ModelAdmin):
+    list_display = ['floor', 'number', 'actor']
+
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['name', 'rating', 'currency', 'budget', 'rating_status']
-    list_editable = ['rating', 'currency', 'budget']
+    list_display = ['name', 'rating', 'currency', 'budget', 'rating_status', 'director']
+    list_editable = ['rating', 'currency', 'budget', 'director']
     ordering = ['rating', 'currency']
     list_per_page = 10
     search_fields = ['name__startswith', 'rating']

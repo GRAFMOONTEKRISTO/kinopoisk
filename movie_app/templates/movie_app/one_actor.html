@@ -11,4 +11,12 @@
   <h3> SURNAME - {{act.surname_actor}}</h3>
   <h3> GENDER - {{act.gender}}</h3>
 
+  <hr>
+  <h3> The list films in which shooting a actor </h3>
+  <ul>
+    {% for movie in act.movie_set.all %}
+        <li> {{ movie }} </li>
+    {% endfor %}
+  </ul>
+
 {% endblock %}
